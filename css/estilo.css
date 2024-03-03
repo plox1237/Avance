@@ -1,3 +1,21 @@
 .fondo{
     background-color: #121230;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+body,html{
+    height: 100vh;
+}
+#mostrarTodo{
+    display: inline-block;
+    vertical-align: top;
+}
+#crearUsuario{
+    display: inline-block;
+    vertical-align: top;
+}
+#eliminarUsuario{
+    display: inline-block;
+    vertical-align: top;
 }
