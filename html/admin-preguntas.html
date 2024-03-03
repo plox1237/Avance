@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar preguntas</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="icon" href="../img/icon.png">
+</head>
+<div class="fondo">
+<body>
+    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Preguntas frecuentes</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar usuarios</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar preguntas</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card p-2">
+                    <div class="text-center">
+                        <h2>Administrar preguntas</h2>
+                    </div>
+                    <div class="lead">Tabla con las preguntas registradas en el Chatbot:</div>
+                    <div class="text-center border border-dark-subtle">
+                        *Aqui va una tabla generada de las preguntas donde muestran las preguntas*
+                    </div>
+                    <div class="lead">Buscar por contexto:</div>
+                    <div class="dropdown">
+                        <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownContexto" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Buscar
+                          </button>
+                          <div class="dropdown-menu" aria-labelledby="dropdownContexto">
+                            <button class="dropdown-item" type="button">Todos</button>
+                            <button class="dropdown-item" type="button">Matriculas</button>
+                            <button class="dropdown-item" type="button">Admisiones</button>
+                            <button class="dropdown-item" type="button">Facultades</button>
+                            <button class="dropdown-item" type="button">CEL</button>
+                            <button class="dropdown-item" type="button">Otros</button>
+                          </div>
+                    </div>
+                    <hr>
+                    <div class="row text-center">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <button class="btn btn-warning w-50">Modificar pregunta</button>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <button class="btn btn-success w-50">Añadir pregunta</button>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <button class="btn btn-danger w-50">Eliminar pregunta</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+
+            </div>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</div>
+</html>

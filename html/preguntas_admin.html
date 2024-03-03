@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntas frecuentes</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="icon" href="../img/icon.png">
+</head>
+<div class="fondo">
+<body>
+    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Preguntas frecuentes</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar usuarios</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar preguntas</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
+</div>
+
+    
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card p-2">
+                    <div class="text-center">
+                        <h2>Preguntas frecuentes</h2>
+                    </div>
+                    <h4 class="lead">Por contexto:</h4>
+                    <div class="border rounded border-dark-subtle mb-2">Aqui va las graficas e informacion</div>
+                    <h4 class="lead">Preguntas de ejemplo:</h4>
+                    <ul>
+                        <li>¿Como puedo matricular modulos?</li>
+                        <li>¿Cuanto vale un credito?</li>
+                        <li>¿Como puedo homologar un modulo?</li>
+                        <li>¿Como funcionan las practicas?</li>
+                    </ul>
+                    <hr>
+                    <h4 class="lead">Por usuario:</h4>
+                    <div class="form-outline">
+                        <label for="">Ingrese el documento de identidad de la persona</label>
+                        <input type="text" class="form-control border border-dark-subtle w-25" placeholder="Documento (TI/CC)">
+                        <button class="btn btn-warning mt-2 mb-2" type="submit" id="buscarPreguntaUser">Buscar</button>
+                    </div>
+                    <div class="border rounded border-dark-subtle mb-1">Aqui se mostraran los resultados de la busqueda</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</div>
+</html>

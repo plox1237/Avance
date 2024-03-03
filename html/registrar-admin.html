@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="icon" href="../img/icon.png">
+</head>
+<div class="fondo">
+<body>
+    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Preguntas frecuentes</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar usuarios</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar preguntas</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
+</div>
+    <div class="container mb-5 pb-5">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <div class="card p-3">
+                        <h1>Registro</h1>
+                        <div class="form-outline mt-3">
+                            <div class="lead"><label for="">Nombre</label></div>
+                            <input type="text" class="form-control border-dark-subtle w-50 mb-3" placeholder="Nombre">
+                            <div class="lead"><label for="">Apellido</label></div>
+                            <input type="text" class="form-control border-dark-subtle w-50 mb-3" placeholder="Apellido">
+                            <div class="lead"><label for="">Documento de identidad</label></div>
+                            <input type="text" class="form-control border-dark-subtle w-50 mb-3" placeholder="CC/TI" maxlength="10">
+                            <div class="lead"><label for="">Correo</label></div>
+                            <input type="email" class="form-control border-dark-subtle w-50 mb-3" placeholder="Correo electronico">
+                            <div class="lead"><label for="">Contraseña</label></div>
+                            <input type="password" class="form-control border-dark-subtle w-50 mb-3" placeholder="Contraseña" minlength="8">
+                            <div class="lead"><label for="">Genero</label></div>
+                            <div class="mb-2">
+                                <label for="masculine">Masculino</label>
+                                <input type="radio" id="masculine" name="gender" value="M">
+                                <label for="femenine">Femenino</label>
+                                <input type="radio" id="femenine" name="gender" value="F">
+                            </div>
+                            <div class="lead"><label for="">Tipo de usuario</label></div>
+                            <div class="mb-2">
+                                <label for="user">Usuario</label>
+                                <input type="radio" id="user" name="gender" value="User">
+                                <label for="admin">Administrador</label>
+                                <input type="radio" id="admin" name="gender" value="Admin">
+                            </div>
+                            <div class="text-center mb-3">
+                                <button class="btn btn-warning w-25">Registrar</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</div>
+</html>

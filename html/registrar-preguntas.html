@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de preguntas</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="icon" href="../img/icon.png">
+</head>
+<div class="fondo">
+<body>
+    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Preguntas frecuentes</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar usuarios</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar preguntas</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
+</div>
+    <div class="container bg-white rounded">
+        <div class="row">
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <h2>Registrar pregunta</h2>
+                    </div>
+                    <label for="" class="lead">Contexto</label>
+                    <select class="form-select mb-2 border border-dark-subtle" aria-label="contextoPregunta">
+                        <option selected>Contexto</option>
+                        <option value="Matriculas">Matriculas</option>
+                        <option value="Admisiones">Admisiones</option>
+                        <option value="Facultades">Facultades</option>
+                        <option value="Facultades">CEL</option>
+                        <option value="Facultades">Otros</option>
+                      </select>
+                    <label for="" class="lead">Formulacion de pregunta</label>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" placeholder="Ingrese la pregunta">
+                    <button class="btn btn-warning w-25 mb-2">Agregar pregunta</button>
+                    <br>
+                    <label for="" class="lead">Posibles respuestas</label>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" placeholder="Ingrese posible respuesta">
+                    <div class="mb-2">
+                        <button class="btn btn-warning w-25">Agregar</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <h2>Pregunta:</h2>
+                        <div class="form-control">Aqui ira la pregunta a la cual se le añadiran las posibles respuestas</div>
+                        <h2 class="lead mt-2">Posibles respuestas:</h2>
+                        <div class="border mb-2">En este cuadro iran las posibles respuestas a la pregunta anteriormente formulada</div>
+                        <button class="btn btn-danger">Eliminar respuestas</button>
+                        <button class="btn btn-warning w-25">Finalizar</button>
+                    </div>
+                    <div class="text-center mt-5">
+                        <button class="btn btn-danger">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</div>
+</html>

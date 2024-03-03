@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar preguntas</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="icon" href="../img/icon.png">
+</head>
+<div class="fondo">
+<body>
+    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+        <div class="offcanvas-header">
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Preguntas frecuentes</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar usuarios</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar preguntas</button></div>
+    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
+</div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="card p-2">
+                    <div class="text-center">
+                        <h2>Administracion de usuarios</h2>
+                    </div>
+                    <div class="lead">Tabla de usuarios registrados en el sistema:</div>
+                    <div class="text-center">*aqui va una tabla que se generara en base a los usuarios registrados en la base de datos*</div>
+                    <div class="form-outline">
+                        <label for="">Buscar por documento:</label>
+                        <input type="text" class="form-control border border-dark-subtle w-25" placeholder="Documento (TI/CC)">
+                        <button class="btn btn-warning mt-2 mb-2" type="submit" id="buscarPreguntaUser">Buscar</button>
+                        <button class="btn btn-warning mt-2 mb-2" type="submit" id="mostrarTodo">Mostrar todo</button>
+                </div>
+                <hr>
+                <div class="text-center">
+                    <button class="btn btn-danger mt-2 mb-2" type="submit" id="elimiUsuario">Eliminar usuario</button>
+                    <button class="btn btn-success mt-2 mb-2" type="submit" id="crearUsuario">Crear usuario</button>
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+</body>
+</div>
+</html>
