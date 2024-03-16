@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-6 offset-md-3">
             <div class="card my-5">
-              <form class="card-body cardbody-color p-lg-5">
+              <form class="card-body cardbody-color p-lg-5" onsubmit="iniciarSesion(event)">
                 <div class="text-center mb-3">
                   <img src="img/logoiub.jpg" class="img-fluid"
                     width="200px" alt="logo">
@@ -24,11 +24,12 @@
                   <input type="text" class="form-control border border-dark-subtle" id="email" placeholder="Correo electronico">
                 </div>
                 <div class="mb-3 lead"><label for="TextContraseña">Contraseña</label></div>
-                <div class="mb-3">
-                  <input type="password" class="form-control border border-dark-subtle" id="password" placeholder="Contraseña">
+                  <div class="input-group mb-3">
+                    <input type="password" class="form-control border border-dark-subtle" placeholder="Contraseña" aria-label="contraseña" aria-describedby="contraseña" id="passw">
+                    <button class="btn btn-warning" type="button" id="showPassw" onclick="togglePassword()">Mostrar</button>
                 </div>
                 <div class="row justify-content-end mb-3 form-text fw-bold"><a href="#" class="text-end text-dark">¿Olvido su contraseña?</a></div>
-                <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100 bg-warning" onclick="iniciarSesion()">Iniciar sesion</button></div>
+                <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100 bg-warning">Iniciar sesion</button></div>
                 <div id="emailHelp" class="form-text text-center text-dark">Sin registrar? <a href="html/register.html" class="text-dark fw-bold">Cree una cuenta</a>
                 </div>
               </form>
@@ -39,5 +40,6 @@
     </div>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="javascript/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </html>
