@@ -74,9 +74,12 @@ const registrarUsuario=(event)=>{
         };
         axios.post("http://127.0.0.1:5000/registrarUsuario",datos)
         .then(response=>{
-            console.log(response.data.mensaje)
-            alert("Registro realizado con exito")
-            formulario.reset()
+            if(response.data.mensaje=="Registro realizado exitosamente"){
+                alert("Registro realizado exitosamente")
+                formulario.reset()
+            }else if(response.data.mensaje=="Usuario ya existente"){
+                alert("Correo y/o identificacion ya registrados en otro usuario");
+            }
         })
         .catch(error=>{
             console.error("ERROR AL REGISTRAR "+error);

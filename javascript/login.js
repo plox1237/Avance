@@ -13,7 +13,12 @@ const iniciarSesion=(event)=>{
         axios.post("http://127.0.0.1:5000/iniciarSesion",datos)
         .then(response=>{
             if (response.data.mensaje=="Usuario no existente"){
-                alert("Correo o/y contraseña incorrectos");
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "Correo y/o contraseña incorrectos.",
+                    confirmButtonColor: "#ffc107"
+                  });
             }else{
                 url=response.data.link;
                 window.location.replace(url)
@@ -21,7 +26,12 @@ const iniciarSesion=(event)=>{
         })
         .catch(error=>{
             console.error("ERROR AL INICIAR SESION: "+error);
-            alert("Error al iniciar sesion")
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Error de conexion con el servidor",
+                confirmButtonColor: "#ffc107"
+              });
         })
     }
 }
