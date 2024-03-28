@@ -1,5 +1,5 @@
 .fondo{
-    background-color: #121230;
+    background-color: #E9EAED;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -24,4 +24,32 @@ body,html{
 #eliminarUsuario{
     display: inline-block;
     vertical-align: top;
+}
+.cabecera{
+    background-color: #111D35;
+}
+i{
+    margin-right: 15px;
+}
+li:hover{
+    background-color: #FFC107;
+    color: black;
+}
+.offcanvas{
+    background-color: #111D35;
+}
+canvas{
+    margin: 0 auto;
+}
+.fondo2{
+    background-color: #111D35;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto; 
 }
