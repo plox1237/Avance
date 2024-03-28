@@ -6,46 +6,105 @@
     <title>Administrar preguntas</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="icon" href="../img/icon.png">
+    <link rel="stylesheet" href="../DataTables/DataTables-2.0.2/css/dataTables.bootstrap5.css">
 </head>
 <div class="fondo">
-<body>
-    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
-    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
-        <div class="offcanvas-header">
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+<body onload="">
+    <div class="cabecera">
+        <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+        <div class="offcanvas offcanvas-start h-100" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+            <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-warning">Menu de navegacion</h5>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between px-0">
+            <ul class="navbar-nav fs-5 text-white">
+                <div class="opciones">
+                    <li class="nav-item p-5 py-md-1"><a href="main-admin.html" class="nav-link"><i class="bi bi-robot"></i>Chatbot</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="estadisticas.html" class="nav-link"><i class="bi bi-reception-3"></i>Estadisticas</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-list-columns"></i>Historial</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="admin-preguntas.html" class="nav-link"><i class="bi bi-question-circle-fill"></i>Administrar preguntas</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="usuarios-admin.html" class="nav-link"><i class="bi bi-person-fill-gear"></i>Administrar usuarios</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right"></i>Cerrar sesion</a></li>
+                </div>
+            </ul>
+        </div>
     </div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Preguntas frecuentes</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar usuarios</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Administrar preguntas</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
-</div>
-    <div class="container mt-4">
+        <img src="../img/logo2.png" alt="logo2" width="150px">
+    </div>
+    <div class="container mt-4 mb-4">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-                <div class="card p-2">
+            <div class="col-md-12">
+                <div class="card p-4">
                     <div class="text-center">
                         <h2>Administracion de usuarios</h2>
                     </div>
-                    <div class="lead">Tabla de usuarios registrados en el sistema:</div>
-                    <div class="text-center">*aqui va una tabla que se generara en base a los usuarios registrados en la base de datos*</div>
-                    <div class="form-outline">
-                        <label for="">Buscar por documento:</label>
-                        <input type="text" class="form-control border border-dark-subtle w-25" placeholder="Documento (TI/CC)">
-                        <button class="btn btn-warning mt-2 mb-2" type="submit" id="buscarPreguntaUser">Buscar</button>
-                        <button class="btn btn-warning mt-2 mb-2" type="submit" id="mostrarTodo">Mostrar todo</button>
-                </div>
-                <hr>
-                <div class="text-center">
-                    <button class="btn btn-danger mt-2 mb-2" type="submit" id="elimiUsuario">Eliminar usuario</button>
-                    <button class="btn btn-success mt-2 mb-2" type="submit" id="crearUsuario">Crear usuario</button>
-                </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="lead mb-2">Busqueda por:</div>
+                            <select class="form-select border border-dark-subtle w-75" aria-label="tipoBusqueda" id="tipoBusqueda">
+                                <option value="Nombre">Nombre</option>
+                                <option value="Apellido">Apellido</option>
+                                <option value="Correo">Correo</option>
+                                <option value="Tipo_documento">Tipo de documento</option>
+                                <option value="No_identificacion">Numero de documento</option>
+                                <option value="ID_Rol">Rol</option>
+                              </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="lead mb-2">Busqueda:</div>
+                            <div class="input-group">
+                                <input type="text" class="form-control w-75 border border-dark-subtle">
+                                <button type="submit" class="btn btn-warning">Buscar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="registrar-admin.html" class=" btn btn-success mt-3">Crear usuario</a>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-warning mt-3" onclick="">Mostrar todo</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="text-center mt-4">
+                                <div class="table-responsive">
+                                    <table id="tablaUsers" class="table table-hover" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th><b>ID</b></th>
+                                                <th><b>Correo</b></th>
+                                                <th><b>Contraseña</b></th>
+                                                <th><b>Tipo documento</b></th>
+                                                <th><b>No. identificacion</b></th>
+                                                <th><b>Nombre</b></th>
+                                                <th><b>Apellido</b></th>
+                                                <th><b>Genero</b></th>
+                                                <th><b>ID Rol</b></th>
+                                                <th><b>Accion</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
             </div>
             <div class="col-md-2"></div>
         </div>
     </div>
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="../DataTables/DataTables-2.0.2/js/dataTables.bootstrap5.js"></script>
+    <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../javascript/usuariosAdmin.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </div>
 </html>

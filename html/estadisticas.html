@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar preguntas</title>
+    <title>Preguntas frecuentes</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="icon" href="../img/icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <div class="fondo">
-<body>
+<body onload="mostrarGraficos()">
     <div class="cabecera">
         <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
         <div class="offcanvas offcanvas-start h-100" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
@@ -35,36 +35,43 @@
     </div>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-12">
                 <div class="card p-4">
                     <div class="text-center">
-                        <h2>Administrar preguntas</h2>
+                        <h2>Estadisticas</h2>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="lead mb-2">Busqueda por:</div>
-                            <select class="form-select border border-dark-subtle w-75" aria-label="tipoBusqueda" id="tipoBusqueda">
-                                <option value="Contexto">Contexto</option>
-                                <option value="ID">ID de pregunta</option>
-                                <option value="Pregunta">Pregunta</option>
-                              </select>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="lead mb-2">Busqueda:</div>
-                            <div class="input-group">
-                                <input type="text" class="form-control w-75 border border-dark-subtle">
-                                <button type="submit" class="btn btn-warning">Buscar</button>
+                    <div class="container-fluid mt-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header text-center">
+                                        Tipo de usuarios registrados
+                                    </div>
+                                    <div>
+                                        <canvas id="graficoUsers" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card h-100">
+                                    <div class="card-header text-center">
+                                        Tipo de preguntas registradas
+                                    </div>
+                                    <div class="text-center">
+                                        <canvas id="graficoPreguntas" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    <div class="lead mt-3">Tabla con las preguntas registradas en el Chatbot:</div>
-                    <div class="text-center border border-dark-subtle">
-                        *Aqui va una tabla generada de las preguntas donde muestran las preguntas*
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+    <script src="../javascript/estadisticas.js"></script>
 </body>
 </div>
 </html>

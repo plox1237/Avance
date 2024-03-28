@@ -10,24 +10,36 @@
 </head>
 <div class="fondo">
 <body>
-    <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
-    <div class="offcanvas offcanvas-start h-100 bg-light" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
-        <div class="offcanvas-header">
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="cabecera">
+        <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
+        <div class="offcanvas offcanvas-start h-100" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
+            <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-warning">Menu de navegacion</h5>
+            <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column justify-content-between px-0">
+            <ul class="navbar-nav fs-5 text-white">
+                <div class="opciones">
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-robot"></i>Chatbot</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-reception-3"></i>Estadisticas</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-list-columns"></i>Historial</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-question-circle-fill"></i>Administrar preguntas</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-person-fill-gear"></i>Administrar usuarios</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-box-arrow-right"></i>Cerrar sesion</a></li>
+                </div>
+            </ul>
+        </div>
     </div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Preguntas frecuentes</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar usuarios</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75" onclick="">Administrar preguntas</button></div>
-    <div class="text-center"><button class="btn btn-warning mb-5 w-75">Cerrar sesion</button></div>
-</div>
-    <div class="container bg-white rounded">
+        <img src="../img/logo2.png" alt="logo2" width="150px">
+    </div>
+    <div class="container bg-white rounded my-5 p-4 border border-dark-subtle">
         <div class="row">
                 <div class="col-lg-6">
                     <div class="text-center">
                         <h2>Registrar pregunta</h2>
                     </div>
                     <label for="" class="lead">Contexto</label>
-                    <select class="form-select mb-2 border border-dark-subtle" aria-label="contextoPregunta">
+                    <select class="form-select mb-3 border border-dark-subtle" aria-label="contextoPregunta">
                         <option selected>Contexto</option>
                         <option value="Matriculas">Matriculas</option>
                         <option value="Admisiones">Admisiones</option>
@@ -36,12 +48,14 @@
                         <option value="Facultades">Otros</option>
                       </select>
                     <label for="" class="lead">Formulacion de pregunta</label>
-                    <input type="text" class="form-control border border-dark-subtle mb-2" placeholder="Ingrese la pregunta">
-                    <button class="btn btn-warning w-25 mb-2">Agregar pregunta</button>
+                    <div class="input-group">
+                        <input type="text" class="form-control border border-dark-subtle" placeholder="Ingrese la pregunta">
+                    <button class="btn btn-warning w-25">Agregar pregunta</button>
+                    </div>
                     <br>
                     <label for="" class="lead">Posibles respuestas</label>
                     <input type="text" class="form-control border border-dark-subtle mb-2" placeholder="Ingrese posible respuesta">
-                    <div class="mb-2">
+                    <div class="mb-2 text-center">
                         <button class="btn btn-warning w-25">Agregar</button>
                     </div>
                 </div>
@@ -52,10 +66,19 @@
                         <h2 class="lead mt-2">Posibles respuestas:</h2>
                         <div class="border mb-2">En este cuadro iran las posibles respuestas a la pregunta anteriormente formulada</div>
                         <button class="btn btn-danger">Eliminar respuestas</button>
-                        <button class="btn btn-warning w-25">Finalizar</button>
                     </div>
-                    <div class="text-center mt-5">
-                        <button class="btn btn-danger">Cancelar</button>
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <a href="usuarios-admin.html" class="btn btn-danger w-50">Cancelar</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text-center">
+                                <button class="btn btn-success w-50">Finalizar</button>
+                            </div>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
