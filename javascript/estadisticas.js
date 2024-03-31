@@ -1,11 +1,11 @@
 const mostrarGraficos=()=>{
     usuariosGrafico()
     contextoGrafico()
+    graficoGeneros()
 }
 const usuariosGrafico=()=>{
-    axios.get("https://plox1237.github.io/Apiuser/users.json")
+    axios.get("http://127.0.0.1:5000/getAllUsers")
     .then(response=>{
-        console.log(response.data)
         let numAdmin=0;
         let numUsers=0;
         response.data.forEach(usuarios=>{
@@ -33,13 +33,19 @@ const usuariosGrafico=()=>{
     })
     .catch(error=>{
         console.log("ERROR AL SOLICITAR LOS DATOS "+error);
-        alert("Se ha producido un error");
+        Swal.fire({
+            title:"Error con el servidor",
+            icon:"error",
+            text:"No se pudo cargar una o varias graficas, intente refrescar la pagina.",
+            toast:true,
+            position:"top",
+            confirmButtonColor: "#ffc107"
+        })
     });
 }
 const contextoGrafico=()=>{
     axios.get("https://plox1237.github.io/Apiuser/preguntas.json")
     .then(response=>{
-        console.log(response.data)
         let numCEL=0;
         let numInsc=0;
         let numMatri=0;
@@ -81,7 +87,52 @@ const contextoGrafico=()=>{
     .catch(error=>{
         console.log(error)
         Swal.fire({
-            
+            title:"Error con el servidor",
+            icon:"error",
+            text:"No se pudo cargar una o varias graficas, intente refrescar la pagina.",
+            toast:true,
+            position:"top",
+            confirmButtonColor: "#ffc107"
+        })
+    })
+}
+const graficoGeneros=()=>{
+    axios.get("http://127.0.0.1:5000/getAllUsers")
+    .then(response=>{
+        let hombres=0;
+        let mujeres=0;
+        response.data.forEach(usuarios=>{
+            if (usuarios.Genero=="M"){
+                hombres++;
+            }else if(usuarios.Genero=="F"){
+                mujeres++;
+            }
+        });
+        let ctx=document.getElementById("graficoGenero");
+        new Chart(ctx,{
+            type:'pie',
+            data: {
+              labels: ['Hombres',"Mujeres"],
+              datasets: [{
+                label: 'Usuarios con este genero',
+                data: [hombres,mujeres],
+              }]
+            },
+            options:{
+                maintainAspectRatio:false,
+                responsive:true
+            }
+          });
+    })
+    .catch(error=>{
+        console.log("ERROR SUCEDIDO AL SOLICITAR LOS DATOS \n"+error)
+        Swal.fire({
+            title:"Error con el servidor",
+            icon:"error",
+            text:"No se pudo cargar una o varias graficas, intente refrescar la pagina.",
+            toast:true,
+            position:"top",
+            confirmButtonColor: "#ffc107"
         })
     })
 }
