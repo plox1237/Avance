@@ -38,9 +38,7 @@ li:hover{
 .offcanvas{
     background-color: #111D35;
 }
-canvas{
-    margin: 0 auto;
-}
+
 .fondo2{
     background-color: #111D35;
     margin: 0;
@@ -52,4 +50,8 @@ canvas{
         right: 0;
         bottom: 0;
         overflow-y: auto; 
+}
+
+.table-responsive{
+    max-height: 600px;
 }
