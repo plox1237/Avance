@@ -126,6 +126,42 @@ def getcount():
         print(e)
         return jsonify({"informacion":e})
 
+#Buscar usuarios#
+@cross_origin()
+@app.route("/Busqueda",methods=["GET","POST"])
+def BuscarValor():
+    try:
+        Categoria=request.json["Categoria"]
+        Valor=request.json["Busqueda"]
+        ValorBuscar=f'%{Valor}%'
+        print(Categoria)
+        print(ValorBuscar)
+        cursor=mysql.connection.cursor()
+        cursor.execute("SELECT * FROM usuario WHERE {} LIKE %s".format(Categoria),(ValorBuscar,))
+        resultado=cursor.fetchall()
+        cursor.close()
+        tabla=[]
+        contenido={}
+        for fila in resultado:
+            contenido={
+                "ID":fila[0],
+                "Correo":fila[1],
+                "Contraseña":fila[2],
+                "Tipo_documento":fila[3],
+                "No_identificacion":fila[4],
+                "Nombre":fila[5],
+                "Apellido":fila[6],
+                "Genero":fila[7],
+                "ID_Rol":fila[8]
+                }
+            tabla.append(contenido)
+            contenido={}
+        return jsonify(tabla)
+    except Exception as error:
+        print("ERROR SUCEDIDO EN LA BUSQUEDA \n",error)
+        return jsonify({"mensaje":"Error durante la busqueda"})
+
+
 #Eliminar por ID
 @cross_origin()
 @app.route('/eliminarID/<id>', methods = ['DELETE'])
