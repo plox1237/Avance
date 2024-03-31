@@ -36,14 +36,14 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="card p-4">
+                <div class="card p-4 border border-dark-subtle">
                     <div class="text-center">
                         <h2>Estadisticas</h2>
                     </div>
                     <div class="container-fluid mt-2">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="card h-100">
+                                <div class="card h-100 border border-dark-subtle">
                                     <div class="card-header text-center">
                                         Tipo de usuarios registrados
                                     </div>
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="card h-100">
+                                <div class="card h-100 border border-dark-subtle">
                                     <div class="card-header text-center">
                                         Tipo de preguntas registradas
                                     </div>
@@ -62,6 +62,26 @@
                                     </div>
                                 </div>
                             </div>
+                                <div class="col-md-6">               
+                                    <div class="card mt-4 border border-dark-subtle">
+                                        <div class="card-header text-center">
+                                            Generos de usuarios registrados
+                                        </div>
+                                        <div class="text-center">
+                                            <canvas id="graficoGenero" width="400" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mt-4 border border-dark-subtle">
+                                        <div class="card-header text-center">
+                                            Tipo de preguntas registradas
+                                        </div>
+                                        <div class="text-center">
+                                            <canvas id="graficoFrecuentes" width="400" height="200"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -72,6 +92,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
     <script src="../javascript/estadisticas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </div>
 </html>

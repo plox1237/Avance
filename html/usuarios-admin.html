@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../DataTables/DataTables-2.0.2/css/dataTables.bootstrap5.css">
 </head>
 <div class="fondo">
-<body onload="">
+<body onload="ConsultarTodo()">
     <div class="cabecera">
         <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
         <div class="offcanvas offcanvas-start h-100" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
@@ -37,7 +37,7 @@
     <div class="container mt-4 mb-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="card p-4">
+                <div class="card p-4 border border-dark-subtle">
                     <div class="text-center">
                         <h2>Administracion de usuarios</h2>
                     </div>
@@ -50,14 +50,17 @@
                                 <option value="Correo">Correo</option>
                                 <option value="Tipo_documento">Tipo de documento</option>
                                 <option value="No_identificacion">Numero de documento</option>
-                                <option value="ID_Rol">Rol</option>
+                                <option value="ID_Rol2">Administradores</option>
+                                <option value="ID_Rol1">Usuarios naturales</option>
+                                <option value="GeneroM">Usuarios masculinos</option>
+                                <option value="GeneroF">Usuarios femeninos</option>
                               </select>
                         </div>
                         <div class="col-md-6">
                             <div class="lead mb-2">Busqueda:</div>
                             <div class="input-group">
-                                <input type="text" class="form-control w-75 border border-dark-subtle">
-                                <button type="submit" class="btn btn-warning">Buscar</button>
+                                <input type="text" class="form-control w-75 border border-dark-subtle" id="busquedaInput">
+                                <button type="submit" class="btn btn-warning" onclick="Buscar()">Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -66,29 +69,28 @@
                             <a href="registrar-admin.html" class=" btn btn-success mt-3">Crear usuario</a>
                         </div>
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-warning mt-3" onclick="">Mostrar todo</button>
+                            <button type="submit" class="btn btn-warning mt-3" onclick="ConsultarTodo()">Mostrar todo</button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="text-center mt-4">
                                 <div class="table-responsive">
-                                    <table id="tablaUsers" class="table table-hover" style="width:100%">
+                                    <table id="tablaUsers" class="table table-hover table-bordered table-responsive" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th><b>ID</b></th>
                                                 <th><b>Correo</b></th>
-                                                <th><b>Contraseña</b></th>
-                                                <th><b>Tipo documento</b></th>
-                                                <th><b>No. identificacion</b></th>
+                                                <th><b>Tipo de documento</b></th>
+                                                <th><b>No. de identificacion</b></th>
                                                 <th><b>Nombre</b></th>
                                                 <th><b>Apellido</b></th>
                                                 <th><b>Genero</b></th>
-                                                <th><b>ID Rol</b></th>
+                                                <th><b>Rol</b></th>
                                                 <th><b>Accion</b></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="cuerpoTabla">
                                         </tbody>
                                     </table>
                                 </div>
@@ -103,8 +105,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="../DataTables/DataTables-2.0.2/js/dataTables.bootstrap5.js"></script>
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../javascript/usuariosAdmin.js"></script>
+    <script src="../javascript/usuariosAdminAlt.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </div>
 </html>
