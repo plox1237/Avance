@@ -12,6 +12,7 @@
 </head>
 <div class="fondo">
 <body onload="ConsultarTodo()">
+    <!----------------------CABECERA------------------------->
     <div class="cabecera">
         <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
         <div class="offcanvas offcanvas-start h-100" taindex="-1" id="offcanvas" aria_labelledby="offcanvasLabel">
@@ -24,7 +25,7 @@
                 <div class="opciones">
                     <li class="nav-item p-5 py-md-1"><a href="main-admin.html" class="nav-link"><i class="bi bi-robot"></i>Chatbot</a></li>
                     <li class="nav-item p-5 py-md-1"><a href="estadisticas.html" class="nav-link"><i class="bi bi-reception-3"></i>Estadisticas</a></li>
-                    <li class="nav-item p-5 py-md-1"><a href="" class="nav-link"><i class="bi bi-list-columns"></i>Historial</a></li>
+                    <li class="nav-item p-5 py-md-1"><a href="historial-admin.html" class="nav-link"><i class="bi bi-list-columns"></i>Historial</a></li>
                     <li class="nav-item p-5 py-md-1"><a href="admin-preguntas.html" class="nav-link"><i class="bi bi-question-circle-fill"></i>Administrar preguntas</a></li>
                     <li class="nav-item p-5 py-md-1"><a href="usuarios-admin.html" class="nav-link"><i class="bi bi-person-fill-gear"></i>Administrar usuarios</a></li>
                     <li class="nav-item p-5 py-md-1"><a href="" class="nav-link" onclick="cerrarSesion()"><i class="bi bi-box-arrow-right"></i>Cerrar sesion</a></li>
@@ -34,6 +35,7 @@
     </div>
         <img src="../img/logo2.png" alt="logo2" width="150px">
     </div>
+    <!-------------------------CUERPO DE PAGINA--------------------------->
     <div class="container mt-4 mb-4">
         <div class="row">
             <div class="col-md-12">
@@ -76,7 +78,7 @@
                         <div class="col-md-12">
                             <div class="text-center mt-4">
                                 <div class="table-responsive">
-                                    <table id="tablaUsers" class="table table-hover table-bordered table-responsive" style="width:100%">
+                                    <table id="tablaUsers" class="table table-striped table-bordered table-responsive" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th><b>ID</b></th>
@@ -101,6 +103,69 @@
             <div class="col-md-2"></div>
         </div>
     </div>
+    <!---------------------------MODAL------------------------->
+    <div class="modal fade" id="modalModificar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modificar</h5>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="lead mb-1">
+                        Nombre
+                    </div>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" id="name">
+                    <div class="lead mb-1">
+                        Apellido
+                    </div>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" id="apellido">
+                    <div class="lead mb-1">
+                        Genero
+                    </div>
+                    <select class="form-select border border-dark-subtle mb-2" id="generoModificar">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                    <div class="lead mb-1">
+                        Tipo de documento
+                    </div>
+                    <select class="form-select border border-dark-subtle mb-2" id="tipoDocModificar">
+                        <option value="CC">Cedula de ciudadania</option>
+                        <option value="TI">Tarjeta de Identidad</option>
+                        <option value="CE">Cedula de extranjeria</option>
+                        <option value="CI">Carné de identidad</option>
+                        <option value="DNI">Documento nacional de identidad</option>
+                        <option value="RC">Registro civil</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <div class="lead mb-1">
+                        Numero de documento
+                    </div>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" maxlength="10" id="numDoc">
+                    <div class="lead mb-1">
+                        Correo institucional
+                    </div>
+                    <input type="text" class="form-control border border-dark-subtle mb-2" id="correo">
+                    <div class="lead mb-1">
+                        Rol
+                    </div>
+                    <select class="form-select border border-dark-subtle mb-2" id="rolModificar">
+                        <option value="1">Usuario natural</option>
+                        <option value="2">Administrador</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-warning" onclick="realizarCambios()">Realizar cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="../DataTables/DataTables-2.0.2/js/dataTables.bootstrap5.js"></script>
