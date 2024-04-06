@@ -1,4 +1,4 @@
-from flask import Flask,request,jsonify,redirect,send_file,url_for
+from flask import Flask,request,jsonify
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
 
@@ -209,18 +209,53 @@ def getAllById(id):
 @app.route('/updateUsers/<id>', methods=['PUT'])
 def update_user(id):
     try:
-        Nombre=request.json["nombre"]
-        Apellido=request.json["apellido"]
-        Correo=request.json["correo"]
-        tipoDoc=request.json["tipoDoc"]
-        docIdentidad=request.json["docIdentidad"]
-        Contraseña=request.json["contraseña"]
-        Genero=request.json["genero"]
-        tipoUser=request.json["tipoUser"]
-        cur = mysql.connection.cursor()
-        cur.execute("""UPDATE usuario SET Correo=%s,Contraseña=%s,Tipo_documento=%s,No_identificacion=%s,Nombre=%s,Apellido=%s,Genero=%s,ID_Rol=%s WHERE id = %s""", (Correo,Contraseña,tipoDoc,docIdentidad,Nombre,Apellido,Genero,tipoUser, id))
-        mysql.connection.commit()
-        return jsonify({"informacion":"Registro actualizado"})
+        ID=int(id)
+        Datos=request.json
+        cursor=mysql.connection.cursor()
+        if "No_identificacion" in Datos:
+            docNum=request.json["No_identificacion"]
+            cursor.execute("SELECT * FROM usuario WHERE No_identificacion=%s",(docNum,))
+            busqueda=cursor.fetchone()
+            if busqueda!=None:
+                print("Usuario existente con esa identificacion")
+                return jsonify({"informacion":"Identificacion ya existente"})
+            else:
+                try:
+                    for atributo,valor in Datos.items():
+                        cursor.execute("UPDATE usuario set {}=%s WHERE ID=%s".format(atributo),(valor,ID))
+                        mysql.connection.commit()
+                        cursor.close()
+                        return jsonify({"informacion":"Registro actualizado"})
+                except Exception as error:
+                    print("Error al actualizar la informacion: \n",error)
+                    return jsonify({"informacion":"Error al actualizar la informacion"})
+        elif "Correo" in Datos:
+            correo=request.json["Correo"]
+            cursor.execute("SELECT * FROM usuario WHERE Correo=%s",(correo,))
+            busqueda=cursor.fetchone()
+            if busqueda!=None:
+                print("Usuario ya existente con ese correo")
+                return jsonify({"informacion":"Correo ya existente"})
+            else:
+                try:
+                    for atributo,valor in Datos.items():
+                        cursor.execute("UPDATE usuario set {}=%s WHERE ID=%s".format(atributo),(valor,ID))
+                        mysql.connection.commit()
+                        cursor.close()
+                        return jsonify({"informacion":"Registro actualizado"})
+                except Exception as err:
+                    print("Error al actualizar la informacion \n",err)
+                    return jsonify({"informacion":"Error al actualizar la informacion"})
+        else:
+            try:
+                for atributo,valor in Datos.items():
+                    cursor.execute("UPDATE usuario set {}=%s WHERE ID=%s".format(atributo),(valor,ID))
+                    mysql.connection.commit()
+                    cursor.close()
+                    return jsonify({"informacion":"Registro actualizado"})
+            except Exception as er:
+                print("Error al actualizar la informacion \n",err)
+                return jsonify({"informacion":"Error al actualizar la informacion"})
     except Exception as e:
         print(e)
         return jsonify({"informacion":e})
