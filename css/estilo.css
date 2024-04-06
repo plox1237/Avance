@@ -52,6 +52,9 @@ li:hover{
         overflow-y: auto; 
 }
 
-.table-responsive{
-    max-height: 600px;
-}
+.modal {
+    background: rgba(0, 0, 0, 0.5); 
+  }
+.modal-backdrop {
+    display: none;
+  }
