@@ -64,7 +64,21 @@ const registrarUsuario = (event) => {
         alert("Usuario registrado exitosamente");
     }
 }
-
+const regresar=()=>{
+    Swal.fire({
+        title:"¿Desea salir?",
+        icon:"question",
+        text:"Los datos introducidos no se guardaran.",
+        showDenyButton:true,
+        denyButtonText:"No",
+        confirmButtonText:"Si",
+        confirmButtonColor: "#ffc107"
+    }).then((result)=>{
+        if(result.isConfirmed){
+            window.location.href="usuarios-admin.html"
+        }
+    })
+}
 // Función para mostrar los mensajes de error en el formulario
 const mostrarMensajesError = (mensajesErrores) => {
     // Obtener el contenedor de mensajes de error
@@ -91,3 +105,4 @@ const togglePassword = () => {
 
 // Agregar evento de clic al botón de registro
 document.querySelector("#registro-form button[type='submit']").addEventListener("click", registrarUsuario);
+

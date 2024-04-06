@@ -1,4 +1,5 @@
 let tabla=document.getElementById("tablaUsers");
+let realizarCambios;
 const ConsultarTodo=()=>{
     while(tabla.rows.length>1){
         tabla.deleteRow(1);
@@ -29,7 +30,7 @@ const ConsultarTodo=()=>{
                 columna8.innerHTML="Administrador";
             }
             columna9=Fila.insertCell(8);
-            columna9.innerHTML=`<a class="btn btn-warning mx-1"><img src="../img/lapiz.png" widht="20px" height="20px"></a><a class="btn btn-danger" onclick="eliminarUsuario(this)"><img src="../img/eliminar.png" "width="20px" height="20px"></a>`
+            columna9.innerHTML=`<button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#modalModificar" onclick="actualizar(this)"><img src="../img/lapiz.png" widht="20px" height="20px"></button><button type="button" class="btn btn-danger" onclick="eliminarUsuario(this)"><img src="../img/eliminar.png" "width="20px" height="20px"></button>`
         }
     })
     .catch(error=>{
@@ -101,7 +102,7 @@ const Buscar=()=>{
                 columna8.innerHTML="Administrador";
             }
             columna9=Fila.insertCell(8);
-            columna9.innerHTML=`<a class="btn btn-warning mx-1"><img src="../img/lapiz.png" widht="20px" height="20px"></a><a class="btn btn-danger" onclick="eliminarUsuario(this)"><img src="../img/eliminar.png" "width="20px" height="20px"></a>`
+            columna9.innerHTML=`<button type="button" class="btn btn-warning mx-1" data-bs-toggle="modal" data-bs-target="#modalModificar" onclick="actualizar(this)"><img src="../img/lapiz.png" widht="20px" height="20px"></button><button type="button" class="btn btn-danger" onclick="eliminarUsuario(this)"><img src="../img/eliminar.png" "width="20px" height="20px"></button>`
         }
     })
     .catch(error=>{
@@ -160,4 +161,151 @@ const eliminarUsuario=(boton)=>{
             });
         }
     })
+}
+const actualizar=(boton)=>{
+    const fila=boton.closest("tr");
+    const ID=fila.children[0].textContent;
+    const correo=fila.children[1].textContent;
+    const tipoDoc=fila.children[2].textContent;
+    const docNum=fila.children[3].textContent;
+    const nombre=fila.children[4].textContent;
+    const apellido=fila.children[5].textContent;
+    const genero=fila.children[6].textContent;
+    const rol=fila.children[7].textContent;
+    let actualRol;
+    document.getElementById("name").value=nombre;
+    document.getElementById("apellido").value=apellido;
+    document.getElementById("generoModificar").value=genero;
+    document.getElementById("numDoc").value=docNum;
+    document.getElementById("correo").value=correo;
+    document.getElementById("rolModificar").value=rol;
+    document.getElementById("tipoDocModificar").value=tipoDoc;
+    if(rol=="Usuario natural"){
+        document.getElementById("rolModificar").value="1";
+        actualRol="1";
+    }else if(rol=="Administrador"){
+        document.getElementById("rolModificar").value="2";
+        actualRol="2";
+    }
+    realizarCambios=()=>{
+        let newName=document.getElementById("name").value;
+        let newSurname=document.getElementById("apellido").value;
+        let newGender=document.getElementById("generoModificar").value;
+        let newDoc=document.getElementById("numDoc").value;
+        let newEmail=document.getElementById("correo").value;
+        let newRol=document.getElementById("rolModificar").value;
+        let newTipoDoc=document.getElementById("tipoDocModificar").value;
+        if(verificarLetras(newName)){
+            if(verificarLetras(newSurname)){
+                if(verificarNumeros(newDoc)){
+                    let cambios={};
+                    if(newName!=nombre){
+                        cambios["Nombre"]=newName;
+                    }
+                    if(newSurname!=apellido){
+                        cambios["Apellido"]=newSurname;
+                    }
+                    if(newGender!=genero){
+                        cambios["Genero"]=newGender;
+                    }
+                    if(newDoc!=docNum){
+                        cambios["No_identificacion"]=newDoc;
+                    }
+                    if(newEmail!=correo){
+                        cambios["Correo"]=newEmail;
+                    }
+                    if(newRol!=actualRol){
+                        cambios["ID_Rol"]=newRol;
+                    }
+                    if(newTipoDoc!=tipoDoc){
+                        cambios["Tipo_documento"]=newTipoDoc;
+                    }
+                    if(Object.entries(cambios).length === 0){
+                        Swal.fire({
+                            title:"No se realizo ningun cambio",
+                            icon:"warning",
+                            text:"Debe realizar al menos un cambio para poder alterar los datos del usuario.",
+                            confirmButtonColor: "#ffc107"
+                        });
+                    }else{
+                        axios.put(`http://127.0.0.1:5000/updateUsers/${ID}`,cambios)
+                        .then(response=>{
+                            if(response.data.informacion=="Identificacion ya existente"){
+                                Swal.fire({
+                                    title:"Identificacion ya existente",
+                                    icon:"error",
+                                    text:"Ya existe un usuario con ese numero de identificacion.",
+                                    confirmButtonColor: "#ffc107"
+                                })
+                            }else if(response.data.informacion=="Correo ya existente"){
+                                Swal.fire({
+                                    title:"Correo ya existente",
+                                    icon:"error",
+                                    text:"Ya existe un usuario con esa direccion de correo electronico.",
+                                    confirmButtonColor: "#ffc107"
+                                })
+                            }else if(response.data.informacion=="Registro actualizado"){
+                                Swal.fire({
+                                    title:"Registro actualizado exitosamente",
+                                    icon:"success",
+                                    text:"El usuario ha sido actualizado de manera correcta.",
+                                    confirmButtonColor: "#ffc107",
+                                    allowOutsideClick:false
+                                }).then((result)=>{
+                                    if(result.isConfirmed){
+                                        window.location.reload();
+                                    }
+                                }).catch(error=>{
+                                    console.log(error);
+                                    Swal.fire({
+                                        title:"Se produjo un error",
+                                        icon:"error",
+                                        text:"Se ha producido un error durante la actualizacion de datos del usuario.",
+                                        confirmButtonColor: "#ffc107"
+                                    });
+                                });
+                            }
+                        });
+                    }
+                }else{
+                    Swal.fire({
+                        title:"Error al cambiar el valor",
+                        icon:"error",
+                        text:"El numero de identificacion no puede llevar letras ni caracteres especiales.",
+                        confirmButtonColor: "#ffc107"
+                    })
+                }
+            }else{
+                Swal.fire({
+                    title:"Error al cambiar el valor",
+                    icon:"error",
+                    text:"El nombre y apellido no pueden llevar numeros y/o caracteres especiales.",
+                    confirmButtonColor: "#ffc107"
+                });
+            }
+        }else{
+            Swal.fire({
+                title:"Error al cambiar el valor",
+                icon:"error",
+                text:"El nombre y apellido no pueden llevar numeros y/o caracteres especiales.",
+                confirmButtonColor: "#ffc107"
+            });
+        }      
+        }
+    }
+const verificarLetras=(valor)=>{
+    const regex=/^[a-zA-Z\s]*$/;
+    if(regex.test(valor)){
+        return true;
+    }else{
+        return false;
+    }
+}
+const verificarNumeros=(valor)=>{
+    const regex=/^\d+$/;
+    if(regex.test(valor)){
+        return true;
+    }else{
+        return false;
+    }
 }
