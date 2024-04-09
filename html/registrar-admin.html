@@ -41,7 +41,7 @@
                 <div class="col-lg-6">
                     <div class="card p-5">
                         <h1>Registro</h1>
-                        <form id="registro-form">
+                        <form id="registro-form" onsubmit="registrarUsuario(event)">
                             <div class="form-outline mt-3">
                                 <div class="lead"><label for="name">Nombre</label></div>
                                 <input type="text" class="form-control border-dark-subtle w-50 mb-3" id="name" placeholder="Nombre">
@@ -63,7 +63,10 @@
                                 <div class="lead"><label for="emailInput">Correo</label></div>
                                 <input type="email" class="form-control border-dark-subtle w-50 mb-3" id="emailInput" placeholder="Correo electronico">
                                 <div class="lead"><label for="passw">Contraseña</label></div>
-                                <input type="password" class="form-control border-dark-subtle w-50 mb-3" id="passw" placeholder="Contraseña" minlength="8">
+                                <div class="input-group mb-3 w-50">
+                                <input type="password" class="form-control border-dark-subtle" id="passw" placeholder="Contraseña" minlength="8">
+                                <button type="button" class="btn btn-warning" onclick="togglePassword()">Mostrar</button>
+                                </div>
                                 <div class="lead"><label>Genero</label></div>
                                 <div class="mb-2">
                                     <label for="masculine">Masculino</label>
@@ -82,12 +85,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="text-center">
-                                            <button type="button" class="btn btn-danger w-50" onclick="regresar()">Cancelar</button>
+                                            <button type="button" class="btn btn-danger w-50" onclick="regresar()">Salir</button>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="text-center">
-                                            <button class="btn btn-warning w-50" onclick="registrarUsuario(event)">Registrar</button>
+                                            <button type="submit" class="btn btn-warning w-50" >Registrar</button>
                                         </div>
                                     </div> 
                                 </div>
@@ -104,6 +107,7 @@
     <script src="../javascript/registrar_admin.js"></script>
     <script src="../javascript/logout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 </div>
 </html>
