@@ -3,15 +3,37 @@ const registrarUsuario = (event) => {
     event.preventDefault(); // Evitar el envío del formulario por defecto
 
     // Obtener los valores de los campos del formulario
+    let formulario=document.getElementById("registro-form");
     let nombre = document.getElementById("name").value;
     let apellido = document.getElementById("apellido").value;
     let tipoDoc=document.getElementById("tipoDoc").value;
     let docIdentidad = document.getElementById("ticc").value;
     let correo = document.getElementById("emailInput").value;
     let contraseña = document.getElementById("passw").value;
-    let genero = document.querySelector('input[name="gender"]:checked');
-    let tipoUsuario = document.querySelector('input[name="tipoUser"]:checked');
+    let genero;
+    let tipoUsuario;
 
+    const revisarRadio=()=>{
+        let radios = document.getElementsByName("gender");
+        radios.forEach(radio => {
+            if(radio.checked){
+                genero=radio.value;
+            }
+        });
+        return genero;
+    }
+    genero=revisarRadio();
+    
+    const revisarUser=()=>{
+        let radios=document.getElementsByName("tipoUser");
+        radios.forEach(radio=>{
+            if(radio.checked){
+                tipoUsuario=radio.value;
+            }
+        })
+        return tipoUsuario;
+    }
+    tipoUsuario=revisarUser();
     // Definir expresiones regulares para validar los campos
     const letrasRegex = /^[a-zA-Z]+$/;
     const numerosRegex = /^[0-9]+$/;
@@ -47,12 +69,12 @@ const registrarUsuario = (event) => {
     }
 
     // Validar el género
-    if (!genero) {
+    if (genero==null) {
         mensajesErrores.push("Por favor, seleccione su género.");
     }
 
     // Validar el tipo de usuario
-    if (!tipoUsuario) {
+    if (tipoUsuario==null) {
         mensajesErrores.push("Por favor, seleccione el tipo de usuario.");
     }
 
@@ -60,8 +82,41 @@ const registrarUsuario = (event) => {
     if (mensajesErrores.length > 0) {
         mostrarMensajesError(mensajesErrores);
     } else {
-        axios.post()
-        alert("Usuario registrado exitosamente");
+        const datos={
+            tipoDoc: tipoDoc,
+            docIdentidad: docIdentidad,
+            nombre: nombre,
+            apellido: apellido,
+            correo: correo,
+            contraseña: contraseña,
+            genero: genero,
+            tipoUser: tipoUsuario
+        };
+        axios.post("http://127.0.0.1:5000/registrarUsuario",datos)
+        .then(response=>{
+            if(response.data.mensaje=="Registro realizado exitosamente"){
+                Swal.fire({
+                    title:"Registro realizado correctamente",
+                    icon:"success",
+                    text:"El registro fue realizado de manera exitosamente.",
+                    confirmButtonColor: "#ffc107",
+                    allowOutsideClick:false
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        formulario.reset();
+                    }
+                });
+            }
+        })
+        .catch(error=>{
+            console.log("ERROR SUCEDIDO DURANTE EL REGISTRO: \n"+error);
+            Swal.fire({
+                title:"Error durante el registro",
+                icon:"error",
+                text:"Ha sucedido un error durante el proceso de registro del usuario",
+                confirmButtonColor: "#ffc107"
+            });
+        })
     }
 }
 const regresar=()=>{
@@ -104,5 +159,5 @@ const togglePassword = () => {
 }
 
 // Agregar evento de clic al botón de registro
-document.querySelector("#registro-form button[type='submit']").addEventListener("click", registrarUsuario);
+
 
