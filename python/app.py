@@ -1,16 +1,35 @@
 from flask import Flask,request,jsonify
 from flask_cors import CORS, cross_origin
 from flask_mysqldb import MySQL
+import jwt
+from functools import wraps
+import datetime
 
 app=Flask(__name__)
 CORS(app)
 
+app.config['SECRET_KEY']="welcometothedeathofus"
 app.config["MYSQL_HOST"]="localhost"
 app.config['MYSQL_USER']="root"
 app.config['MYSQL_PASSWORD']=''
 app.config['MYSQL_DB']='ia'
 app.config["MYSQL_PORT"]=3307
 mysql=MySQL(app)
+
+#Token
+def token_required(f):
+    @wraps(f)
+    def decorated(*args,**kwargs):
+        token=request.args.get('token')
+        if not token:
+            return jsonify({{"mensaje":"Token no existente"}})
+        try:
+            data=jwt.decode(token,app.config['SECRET_KEY'],algorithms=['HS256'])
+            print(data)
+        except:
+            return jsonify({"mensaje":"Token invalido"})
+        return f(*args,**kwargs)
+    return decorated
 
 #Registrar usuario
 @cross_origin()
@@ -75,6 +94,7 @@ def login():
             return jsonify({
                  "mensaje":error
             })
+
 #Consultar usuarios
 @cross_origin
 @app.route("/getAllUsers",methods=["GET"])
