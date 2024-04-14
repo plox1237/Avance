@@ -58,3 +58,17 @@ li:hover{
 .modal-backdrop {
     display: none;
   }
+.fondoContraseña{
+    background-image: url(../img/iub1.jpeg);
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto; 
+}
