@@ -20,8 +20,40 @@ const iniciarSesion=(event)=>{
                     confirmButtonColor: "#ffc107"
                   });
             }else{
-                url=response.data.link;
-                window.location.replace(url)
+                const token=response.data.token;
+                const Nombre=response.data.nombre;
+                const Apellido=response.data.apellido;
+                const Genero=response.data.genero;
+                const url=response.data.link;
+                localStorage.setItem("NombreUsuario",Nombre);
+                localStorage.setItem("ApellidoUsuario",Apellido);
+                localStorage.setItem("GeneroUsuario",Genero);
+                localStorage.setItem("token",token);
+                if(Genero==="M"){
+                    Swal.fire({
+                    title:"Inicio de sesion exitoso",
+                    icon:"success",
+                    text:"Bienvenido, "+Nombre+" "+Apellido,
+                    allowOutsideClick:false,
+                    confirmButtonColor: "#ffc107"
+                    }).then((result)=>{
+                        if(result.isConfirmed){
+                            window.location.replace(url)
+                        }
+                    })
+                }else if(Genero==="F"){
+                    Swal.fire({
+                        title:"Inicio de sesion exitoso",
+                        icon:"success",
+                        text:"Bienvenida, "+Nombre+" "+Apellido,
+                        allowOutsideClick:false,
+                        confirmButtonColor: "#ffc107"
+                    }).then((result)=>{
+                        if(result.isConfirmed){
+                            window.location.replace(url)
+                        }
+                    })
+                }
             }
         })
         .catch(error=>{

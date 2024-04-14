@@ -106,6 +106,13 @@ const registrarUsuario = (event) => {
                         formulario.reset();
                     }
                 });
+            }else if(response.data.mensaje=="Usuario ya existente"){
+                Swal.fire({
+                    title:"Error durante el registro",
+                    icon:"error",
+                    text:"Ya existe un usuario con ese correo y/o numero de identificacion.",
+                    confirmButtonColor: "#ffc107"
+                });
             }
         })
         .catch(error=>{

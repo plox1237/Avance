@@ -75,10 +75,24 @@ const registrarUsuario=(event)=>{
         axios.post("http://127.0.0.1:5000/registrarUsuario",datos)
         .then(response=>{
             if(response.data.mensaje=="Registro realizado exitosamente"){
-                alert("Registro realizado exitosamente")
-                formulario.reset()
+                Swal.fire({
+                    title:"Registro realizado correctamente",
+                    icon:"success",
+                    text:"El registro fue realizado de manera exitosamente.",
+                    confirmButtonColor: "#ffc107",
+                    allowOutsideClick:false
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        formulario.reset();
+                    }
+                });
             }else if(response.data.mensaje=="Usuario ya existente"){
-                alert("Correo y/o identificacion ya registrados en otro usuario");
+                Swal.fire({
+                    title:"Error durante el registro",
+                    icon:"error",
+                    text:"Ya existe un usuario con ese correo y/o numero de identificacion.",
+                    confirmButtonColor: "#ffc107"
+                });
             }
         })
         .catch(error=>{
