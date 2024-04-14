@@ -8,25 +8,25 @@
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="icon" href="../img/icon.png">
 </head>
+<div class="fondo2">
 <body>
-    <div class="fondo2">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="card my-5">
-                        <form class="card-body cardbody-color p-lg-5" onsubmit="registrarUsuario(event)" id="formRegister">
-                            <div class="fw lead mb-3"><h1>Registro</h1></div>
-                            <div class="mb-3 lead"><label for="TextNombre">Nombre</label></div>
-                            <div class="mb-3 form-outline w-50">
-                                <input type="text" class="form-control border border-dark-subtle" id="name" aria-describedby="emailHelp"
-                                    placeholder="Nombre">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-3">
+                <div class="lead text-center"><h1>Registro</h1></div>
+                <div class="row">
+                    <form id="formRegister" class="form" onsubmit="registrarUsuario(event)">
+                    <div class="col-md-6">
+                        <div class="mb-2 lead"><label for="TextNombre">Nombre</label></div>
+                            <div class="mb-3 form-outline w-75">
+                                <input type="text" class="form-control border border-dark-subtle" id="name" placeholder="Nombre">
                             </div>
-                            <div class="mb-3 lead"><label for="ApellidoText">Apellido</label></div>
-                            <div class="mb-3 form-outline w-50">
+                            <div class="mb-2 lead"><label for="ApellidoText">Apellido</label></div>
+                            <div class="mb-3 form-outline w-75">
                                 <input type="text" class="form-control border border-dark-subtle" id="apellido" placeholder="Apellido">
                             </div>
-                            <div class="mb-3 lead"><label for="">Tipo de documento</label></div>
-                            <div class="mb-3 form-outline w-50">
+                            <div class="mb-2 lead"><label for="">Tipo de documento</label></div>
+                            <div class="mb-3 form-outline w-75">
                                 <select class="form-select border border-dark-subtle" aria-label="tipoDocumento" id="tipoDoc">
                                     <option value="CC">Cedula de ciudadania</option>
                                     <option value="TI">Tarjeta de Identidad</option>
@@ -36,41 +36,50 @@
                                     <option value="RC">Registro civil</option>
                                   </select>
                             </div>
-                            <div class="mb-3 lead"><label for="CC_TIText">Numero de identificacion</label></div>
-                            <div class="mb-3 form-outline w-50">
+                            <div class="mb-2 lead"><label for="CC_TIText">Numero de identificacion</label></div>
+                            <div class="mb-3 form-outline w-75">
                                 <input type="text" class="form-control border border-dark-subtle" id="doc" placeholder="Identificacion" maxlength="10" minlength="10">
                             </div>
-                            <div class="mb-3 lead"><label>Correo institucional</label></div>
-                            <div class="mb-3 form-outline w-50">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2 lead"><label>Correo institucional</label></div>
+                            <div class="mb-3 form-outline w-75">
                                 <input type="email" class="form-control border border-dark-subtle" id="emailInput" placeholder="Direccion de correo electronico">
                             </div>
-                            <div class="mb-3 lead"><label>Contraseña</label></div>
-                            <div class="mb-3 form-outline w-50">
+                            <div class="mb-2 lead"><label>Contraseña</label></div>
+                            <div class="mb-3 form-outline w-75">
                                 <div class="input-group mb-3">
                                     <input type="password" class="form-control border border-dark-subtle" placeholder="Contraseña" aria-label="contraseña" aria-describedby="contraseña" id="passw">
                                     <button class="btn btn-warning" type="button" id="showPassw" onclick="togglePassword()">Mostrar</button>
                                 </div>
                             </div>
-                            <div class="mb-3 lead"><label>Genero</label></div>
+                            <div class="mb-2 lead"><label>Genero</label></div>
                             <div class="fw mb-4">
                                 <label for="masculine">Masculino</label>
                                 <input type="radio" id="masculine" name="gender" value="M">
                                 <label for="femenine">Femenino</label>
                                 <input type="radio" name="gender" id="femenine" value="F">
                             </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div id="errores-container" class="text-danger mb-4"></div>
                             <div class="text-center"><button type="submit" class="btn btn-color px-5 mb-5 w-100 bg-warning" id="botonRegistrar">Registrar</button></div>
                             <div id="emailHelp" class="form-text text-center text-dark">Tiene una cuenta? <a href="../index.html" class="text-dark fw-bold">Inicie sesion</a>
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    </form>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
+            
         </div>
     </div>
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../javascript/register.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
+</div>
 </html>
