@@ -16,20 +16,33 @@ app.config['MYSQL_DB']='ia'
 app.config["MYSQL_PORT"]=3307
 mysql=MySQL(app)
 
-#Token
+#Verificar token
 def token_required(f):
     @wraps(f)
     def decorated(*args,**kwargs):
-        token=request.args.get('token')
+        token=None
+        print(token)
+        print(type(token))
+        if 'Authorization' in request.headers:
+            token=request.headers["Authorization"].split(" ")[1]
         if not token:
-            return jsonify({{"mensaje":"Token no existente"}})
+            return jsonify({"mensaje":"Token no existente"})
         try:
             data=jwt.decode(token,app.config['SECRET_KEY'],algorithms=['HS256'])
             print(data)
-        except:
+        except jwt.ExpiredSignatureError:
+            return jsonify({"mensaje":"Token expirado"})
+        except jwt.InvalidTokenError:
             return jsonify({"mensaje":"Token invalido"})
         return f(*args,**kwargs)
     return decorated
+
+#Proteger interfaz
+@cross_origin
+@app.route("/interfazProtegida",methods=["GET"])
+@token_required
+def verificarToken():
+    return jsonify({"mensaje":"Token valido"})
 
 #Registrar usuario
 @cross_origin()
@@ -76,16 +89,18 @@ def login():
                correo=request.json["correo"]
                contraseña=request.json["contraseña"]
                cursor=mysql.connection.cursor()
-               cursor.execute("SELECT ID_Rol FROM usuario where Correo=%s AND Contraseña=%s",(correo,contraseña))
-               usuario=cursor.fetchone()
-               if usuario!=None:
-                    ID_Rol=usuario[0]
+               cursor.execute("SELECT * FROM usuario where Correo=%s AND Contraseña=%s",(correo,contraseña))
+               resultado=cursor.fetchone()
+               if resultado!=None:
+                    ID_Rol=resultado[8]
                     if ID_Rol==1:
                          cursor.close()
-                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main.html"})
+                         token=jwt.encode({"usuario":resultado[1],"contraseña":resultado[2],"exp":datetime.datetime.utcnow()+datetime.timedelta(hours=2)},app.config['SECRET_KEY'])
+                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7]})
                     elif ID_Rol==2:
                          cursor.close()
-                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main-admin.html"})
+                         token=jwt.encode({"usuario":resultado[1],"contraseña":resultado[2],"exp":datetime.datetime.utcnow()+datetime.timedelta(hours=2)},app.config['SECRET_KEY'])
+                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main-admin.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7]})
                else:
                     return jsonify({"mensaje":"Usuario no existente"})
 
@@ -98,7 +113,7 @@ def login():
 #Consultar usuarios
 @cross_origin
 @app.route("/getAllUsers",methods=["GET"])
-def eliminar():
+def consultar():
      if request.method=="GET":
           try:
                cursor=mysql.connection.cursor()
@@ -391,6 +406,32 @@ def eliminarIdRol(id):
 ################################################TABLA TIPO DE PREGUNTA##############################################
 
 #Mostrar todos los tipos de pregunta#
+
+@cross_origin
+@app.route("/mostrarPreguntas",methods=["GET"])
+def mostrarPreg():
+    try:
+        cursor=mysql.connection.cursor()
+        cursor.execute("SELECT t.id, t.name, COUNT(p.id) AS cantidad_patterns FROM tag t INNER JOIN patterns p ON t.id = p.idtag GROUP BY t.id, t.name LIMIT 0, 25")
+        resultado=cursor.fetchall()
+        cursor.close()
+        tabla=[]
+        contenido={}
+        for fila in resultado:
+            contenido={
+            "ID":fila[0],
+            "Contexto":fila[1],
+            "Preguntas":fila[2],
+            }
+            tabla.append(contenido)
+            contenido={}
+        return jsonify(tabla)
+    except Exception as error:
+        print("ERROR SUCEDIDO DURANTE LA CONSULTA DE PREGUNTAS \n",error)
+        return jsonify({"mensaje":"Error al consultar"})
+
+
+
 @cross_origin()
 @app.route('/getTipoPreguntas', methods=['GET'])
 def getTipoPre():
