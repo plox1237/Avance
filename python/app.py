@@ -4,10 +4,12 @@ from flask_mysqldb import MySQL
 import jwt
 from functools import wraps
 import datetime
+from flask_mail import Mail,Message
 
 app=Flask(__name__)
 CORS(app)
 
+#Configuracion base de datos
 app.config['SECRET_KEY']="welcometothedeathofus"
 app.config["MYSQL_HOST"]="localhost"
 app.config['MYSQL_USER']="root"
@@ -15,6 +17,15 @@ app.config['MYSQL_PASSWORD']=''
 app.config['MYSQL_DB']='ia'
 app.config["MYSQL_PORT"]=3307
 mysql=MySQL(app)
+
+#Configurar correo
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']=587
+app.config['MAIL_USERNAME']='mcastror@unibarranquilla.edu.co'
+app.config['MAIL_PASSWORD']='M@nCas12'
+app.config['MAIL_USE_TLS']=True
+app.config['MAIL_USE_SSL']=False
+mail = Mail(app)
 
 #Verificar token
 def token_required(f):
@@ -96,11 +107,11 @@ def login():
                     if ID_Rol==1:
                          cursor.close()
                          token=jwt.encode({"usuario":resultado[1],"contraseña":resultado[2],"exp":datetime.datetime.utcnow()+datetime.timedelta(hours=2)},app.config['SECRET_KEY'])
-                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7]})
+                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7],"ID_Usuario":resultado[0]})
                     elif ID_Rol==2:
                          cursor.close()
                          token=jwt.encode({"usuario":resultado[1],"contraseña":resultado[2],"exp":datetime.datetime.utcnow()+datetime.timedelta(hours=2)},app.config['SECRET_KEY'])
-                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main-admin.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7]})
+                         return jsonify({"mensaje":"Redireccionando","link":"http://localhost/DeathofUs/html/main-admin.html","token":token.encode('utf-8').decode('utf-8'),"nombre":resultado[5],"apellido":resultado[6],"genero":resultado[7],"ID_Usuario":resultado[0]})
                else:
                     return jsonify({"mensaje":"Usuario no existente"})
 
@@ -109,6 +120,25 @@ def login():
             return jsonify({
                  "mensaje":error
             })
+
+#Enviar correo
+@cross_origin
+@app.route("/enviarCorreo",methods=["POST"])
+def enviarCorreo():
+    correo=request.json["Correo"]
+    if request.method=="POST":
+        try:
+            mensaje=Message(
+                subject=("Actualizar contraseña"),
+                sender=("UnibarranquillaBOT@gmail.com"),
+                recipients=(correo),
+                body=("Buenas, este correo se le ha sido enviado por solicitud de cambio de contraseña registrada en su cuenta. \n Por favor acceda al siguiente enlace: \n http://localhost/DeathofUs/cambiarContraseña.html")
+            )
+            mail.send(mensaje)
+            return jsonify({"mensaje":"El correo fue enviado exitosamente"})
+        except Exception as error:
+            print("HUBO UN ERROR AL MANDAR EL CORREO \n",error)
+            return jsonify({"mensaje":"Hubo un error al mandar el mensaje"})
 
 #Consultar usuarios
 @cross_origin
@@ -774,6 +804,31 @@ def getConversations():
     except Exception as e:
         print(e)
         return jsonify({"informacion":e})
+
+#Consultar historial especifico
+@cross_origin
+@app.route("/consultarHistorial",methods=["GET","POST"])
+def consultarHistorial():
+    try:
+        usuarioID=request.json["usuarioID"]
+        cursor=mysql.connection.cursor()
+        cursor.execute("SELECT Texto,Respuesta,Fecha_hora FROM historial_usuario WHERE ID_Usuario=%s",(usuarioID))
+        resultado=cursor.fetchall()
+        cursor.close()
+        tabla=[]
+        contenido={}
+        for fila in resultado:
+            contenido={
+            "Texto":fila[0],
+            "Respuesta":fila[1],
+            "Fecha_hora":fila[2]
+            }
+            tabla.append(contenido)
+            contenido={}
+        return jsonify(tabla)
+    except Exception as error:
+        print("SE HA PRODUCIDO UN ERROR DURANTE LA CONSULTA DEL HISTORIAL \n",error)
+        return jsonify({"mensaje":"Se ha producido un error"})
 
 if __name__=="__main__":
     app.run(host="127.0.0.1",port=5000,debug=True)
