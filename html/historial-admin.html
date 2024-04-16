@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <div class="fondo">
-<body>
+<body onload="consultarHistorial()">
     <!----------------------CABECERA------------------------->
     <div class="cabecera">
         <button class="btn btn-warning m-2" type="button" data-bs-toggle="offcanvas" data-bs-target=".offcanvas" aria-controls="offcanvas"><img src="../img/offcanvas_icon.png" alt="offcanv" width="30px" height="30px"></button>
@@ -58,7 +58,8 @@
                         <table id="tablaConversacion" class="table table-striped table-responsive table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th><b>Pregunta</b></th>
+                                    <th><b>Texto</b></th>
+                                    <th><b>Respuesta</b></th>
                                     <th><b>Fecha y hora</b></th>
                                 </tr>
                             </thead>
@@ -91,6 +92,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../javascript/navbar.js"></script>
+    <script src="../javascript/historial.js"></script>
 </body>
 </div>
 </html>

@@ -22,8 +22,8 @@
                     </div>
                     <div class="lead mb-3">Por favor, introduzca su direccion de correo electronico institucional.</div>
                     <div class="text-center">
-                        <input type="email" class="form-control border border-dark-subtle mb-3" placeholder="Correo institucional">
-                        <button type="submit" class="btn btn-warning mb-3">Enviar correo</button>
+                        <input type="email" class="form-control border border-dark-subtle mb-3" placeholder="Correo institucional" id="correo">
+                        <button type="submit" class="btn btn-warning mb-3" onclick="enviarCorreo()">Enviar correo</button>
                     </div>
                     <div class="form-text text-center text-dark">Tiene una cuenta? <a href="../index.html" class="text-dark fw-bold">Inicie sesion</a></div>
                 </div>
@@ -34,6 +34,7 @@
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../javascript/enviarCorreo.js"></script>
 </body>
 </div>
 </html>
