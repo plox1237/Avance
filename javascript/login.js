@@ -25,10 +25,12 @@ const iniciarSesion=(event)=>{
                 const Apellido=response.data.apellido;
                 const Genero=response.data.genero;
                 const url=response.data.link;
+                const usuarioID=response.data.ID_Usuario;
                 localStorage.setItem("NombreUsuario",Nombre);
                 localStorage.setItem("ApellidoUsuario",Apellido);
                 localStorage.setItem("GeneroUsuario",Genero);
                 localStorage.setItem("token",token);
+                localStorage.setItem("usuarioID",usuarioID);
                 if(Genero==="M"){
                     Swal.fire({
                     title:"Inicio de sesion exitoso",

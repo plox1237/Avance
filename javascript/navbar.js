@@ -13,6 +13,7 @@ const historial=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -51,6 +52,7 @@ const historialAdmin=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -89,6 +91,7 @@ const chatbot=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario"); 
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -127,6 +130,7 @@ const chatbotAdmin=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -165,6 +169,7 @@ const usuariosAdmin=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -204,6 +209,7 @@ const estadisticas=()=>{
             localStorage.removeItem("NombreUsuario");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -242,6 +248,7 @@ const preguntasAdmin=()=>{
             localStorage.removeItem("NombreApellido");
             localStorage.removeItem("ApellidoUsuario");
             localStorage.removeItem("GeneroUsuario");
+            localStorage.removeItem("usuarioID");
             Swal.fire({
                 title:"Su sesion caduco",
                 icon:"error",
@@ -270,16 +277,6 @@ const cerrarSesion=()=>{
     localStorage.removeItem("NombreUsuario");
     localStorage.removeItem("ApellidoUsuario");
     localStorage.removeItem("GeneroUsuario");
+    localStorage.removeItem("usuarioID");
     window.location.replace("http://localhost/DeathofUs/index.html");
-}
-const detonacion=()=>{
-    localStorage.removeItem('token');
-    localStorage.removeItem("NombreUsuario");
-    localStorage.removeItem("ApellidoUsuario");
-    localStorage.removeItem("GeneroUsuario");
-    Swal.fire({
-        title:"DETONACION",
-        icon:"success",
-        text:"TOKEN DESTRUIDO"
-    })
 }
